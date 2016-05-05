@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Game : MonoBehaviour {
 
     public GameObject ballPrefab;
     public GameObject player1, player2;
-    public bool slowMo;
 
     private Vector2 ballSpawn, player1Spawn, player2Spawn;
 
@@ -14,6 +15,11 @@ public class Game : MonoBehaviour {
     public static Game instance;
 
     private bool hasScored = false;
+
+    public delegate void EventHandler();
+
+    public event EventHandler OnGameStart;
+    public event EventHandler OnGoal;
 
     void Awake()
     {
@@ -27,11 +33,7 @@ public class Game : MonoBehaviour {
 	void Start () {
         Reset();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 
     public void Goal(int team)
     {
@@ -47,14 +49,9 @@ public class Game : MonoBehaviour {
         {
             player1Score++;
         }
-
-        if (slowMo)
-        {
-            Time.timeScale = 0.1f;
-        }
         Invoke("Reset", 0.1f);
         hasScored = true;
-
+        OnGoal.Invoke();
         
     }
 
@@ -63,20 +60,20 @@ public class Game : MonoBehaviour {
         ResetBall();
         ResetGameObject(player1, player1Spawn);
         ResetGameObject(player2, player2Spawn);
-
-        Time.timeScale = 1f;
         hasScored = false;
+
+        OnGameStart.Invoke();
     }
 
     private void ResetBall()
     {
         foreach (var b in GameObject.FindGameObjectsWithTag("Ball"))
         {
-            Destroy(b);
+            DestroyImmediate(b);
         }
 
         var ball = Instantiate(ballPrefab, ballSpawn, Quaternion.identity) as GameObject;
-        ball.GetComponent<Rigidbody2D>().velocity = Vector2.down * Random.Range(10f, 30f);
+        ball.GetComponent<Rigidbody2D>().velocity = Vector2.down * UnityEngine.Random.Range(10f, 30f);
     }
 
     private void ResetGameObject(GameObject go, Vector2 pos)
