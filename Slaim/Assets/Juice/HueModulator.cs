@@ -10,7 +10,7 @@ public class HueModulator : MonoBehaviour {
     private float startV;
     private float startS;
 
-    public float speed = 60f;
+    public float speed = 90f;
 
 	// Use this for initialization
 	void Start () {
@@ -29,8 +29,18 @@ public class HueModulator : MonoBehaviour {
             startColor = _camera.backgroundColor;
         }
 
-
+        bool wasWhite = Mathf.Abs(startColor.r + startColor.g + startColor.b -3f) < 0.01f;
         Util.RGBToHSV(startColor, out startH, out startV, out startS);
+
+        if (wasWhite)
+        {
+            startV = 0.9f;
+            startS = 0.9f;
+            startH = Random.Range(0f, 360f);
+        }
+
+
+
     }
 	
     Color hueShift()
