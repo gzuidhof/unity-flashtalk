@@ -7,6 +7,7 @@ public class Game : MonoBehaviour {
 
     public GameObject ballPrefab;
     public GameObject player1, player2;
+    new public Camera camera;
 
     private Vector2 ballSpawn, player1Spawn, player2Spawn;
 
