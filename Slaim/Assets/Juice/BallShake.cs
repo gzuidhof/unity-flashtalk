@@ -23,7 +23,6 @@ public class BallShake : MonoBehaviour {
         if (velocity < 3f) return;
 
         float shakeIntensity = velocity / 15f;
-        Debug.Log(velocity + "" + shakeIntensity);
 
         Game.instance.camera.GetComponent<Shaker>().Shake(shakeIntensity);
     }
