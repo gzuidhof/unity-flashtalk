@@ -4,26 +4,26 @@ using System.Collections;
 public class Shaker : MonoBehaviour {
 
     public float shakeTime = 0.2f;
-    public float shakeAmount = 0.1f;
+    public float shakeAmount = 0.075f;
     private Vector3 startPos;
 
     private bool isShaking = false;
 
-    public void Shake()
+    public void Shake(float intensity = 1f)
     {
-        StartCoroutine(DoShake());
+        StartCoroutine(DoShake(intensity));
     }
 
-    private IEnumerator DoShake()
+    private IEnumerator DoShake(float intensity)
     {
         if (isShaking)
             yield break;
         isShaking = true;
         startPos = transform.position;
-        var time = shakeTime;
+        var time = Mathf.Max(shakeTime, shakeTime* intensity);
         while (time > 0f)
         {
-            Vector2 shake = Random.insideUnitCircle * shakeAmount;
+            Vector2 shake = Random.insideUnitCircle * shakeAmount * intensity;
             transform.position += new Vector3(shake.x, shake.y);
             time -= Time.deltaTime;
             yield return null;
