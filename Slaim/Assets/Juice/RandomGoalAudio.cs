@@ -9,6 +9,8 @@ public class RandomGoalAudio : MonoBehaviour
 
     private AudioSource audioSource;
 
+    public AudioClip airhorn;
+
     [Serializable]
     public struct ClipProbability
     {
@@ -29,7 +31,11 @@ public class RandomGoalAudio : MonoBehaviour
             audioClips.Add(clip.clip, clip.probability);
         }
 
-        Game.instance.OnGoal += () => audioSource.PlayOneShot(SelectRandomClip());
+        Game.instance.OnGoal += () =>
+        {
+            audioSource.PlayOneShot(airhorn);
+            audioSource.PlayOneShot(SelectRandomClip());
+        };
 	}
 
 
