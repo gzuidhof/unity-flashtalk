@@ -3,6 +3,8 @@ using System.Collections;
 
 public class HueModulator : MonoBehaviour {
 
+    private float extraV = 0f;
+
     private Camera _camera;
     private SpriteRenderer _rend;
 
@@ -47,13 +49,14 @@ public class HueModulator : MonoBehaviour {
     {
         startH += Time.deltaTime * speed;
 
-        return Util.HsvToRgbColor(startH, startS, startV);
+        return Util.HsvToRgbColor(startH, startS, startV + extraV);
     }
 
 
 	// Update is called once per frame
-	void Update () {
-
+	void Update()
+	{
+	    extraV = Mathf.Lerp(extraV, 0, 0.1f);
 
         if (_camera)
         {
@@ -66,4 +69,9 @@ public class HueModulator : MonoBehaviour {
         }
 
 	}
+
+    public void Flash()
+    {
+        extraV += 1f - startV + extraV;
+    }
 }
