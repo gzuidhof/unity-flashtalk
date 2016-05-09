@@ -9,6 +9,7 @@ public class RandomGoalAudio : MonoBehaviour
 
     private AudioSource audioSource;
 
+    public bool playDankMeme = false;
     public AudioClip airhorn;
 
     [Serializable]
@@ -34,7 +35,8 @@ public class RandomGoalAudio : MonoBehaviour
         Game.instance.OnGoal += () =>
         {
             audioSource.PlayOneShot(airhorn);
-            audioSource.PlayOneShot(SelectRandomClip());
+            if (playDankMeme)
+                audioSource.PlayOneShot(SelectRandomClip());
         };
 	}
 
