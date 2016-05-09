@@ -70,8 +70,8 @@ public class HueModulator : MonoBehaviour {
 
 	}
 
-    public void Flash()
+    public void Flash(float intensity)
     {
-        extraV += 1f - startV + extraV;
+        extraV += Mathf.Max(0f, intensity - startV + extraV);
     }
 }
