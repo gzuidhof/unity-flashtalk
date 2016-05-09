@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Game : MonoBehaviour {
 
@@ -31,7 +31,8 @@ public class Game : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Start () {
+	void Start()
+    {
         Reset();
 	}
 
@@ -82,4 +83,6 @@ public class Game : MonoBehaviour {
         go.transform.position = pos;
         go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
+
+
 }

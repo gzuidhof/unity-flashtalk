@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 
 public class Goal : MonoBehaviour {
 
@@ -12,4 +14,6 @@ public class Goal : MonoBehaviour {
             Game.instance.Goal(team);
         }
     }
+
+    
 }
