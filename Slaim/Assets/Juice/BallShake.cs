@@ -7,6 +7,8 @@ public class BallShake : MonoBehaviour {
     private Rigidbody2D rb;
     private HueModulator cameraColor;
 
+    public bool flashScreen = false;
+
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
@@ -16,17 +18,23 @@ public class BallShake : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        cameraColor.Flash();
+
+        float velocity = rb.velocity.magnitude;
+        if (velocity < 3f) return;
+        float shakeIntensity = velocity / 15f;
+
+        if (flashScreen)
+            cameraColor.Flash(shakeIntensity*0.75f);
+
+
 
         //Is player or (other) ball (and not goal post)
         if (coll.gameObject.CompareTag("Ball")) return;
         if (coll.gameObject.layer == playerLayer && !coll.gameObject.name.StartsWith("goal")) return;
 
 
-        float velocity = rb.velocity.magnitude;
-        if (velocity < 3f) return;
+        
 
-        float shakeIntensity = velocity / 15f;
 
         Game.instance.camera.GetComponent<Shaker>().Shake(shakeIntensity);
     }
