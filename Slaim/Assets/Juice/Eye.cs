@@ -9,7 +9,8 @@ public class Eye : MonoBehaviour {
     public float pupilOffset = 0.1f;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
         Game.instance.OnGameStart += () =>
         {
             ball = GameObject.FindGameObjectWithTag("Ball").transform;
@@ -21,4 +22,6 @@ public class Eye : MonoBehaviour {
         Vector3 offset = (ball.position - transform.position).normalized * pupilOffset;
         pupil.transform.position = transform.position + offset;
 	}
+
+
 }
