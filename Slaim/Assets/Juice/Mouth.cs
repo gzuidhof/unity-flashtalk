@@ -33,7 +33,7 @@ public class Mouth : MonoBehaviour {
         float goalExcited = 0f;
         float goalScare = 0f;
 
-        if (ball.position.y < 3.75f)
+        if (ball.position.y < 2.75f)
         {
             goalExcited = Mathf.Lerp(0f, maxYScale, (ball.position.x - 6.75f) / 2f);
             goalScare = Mathf.Lerp(0f, maxYScale, (ball.position.x + 6.75f) / -2f);

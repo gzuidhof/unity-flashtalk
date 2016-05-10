@@ -22,6 +22,8 @@ public class Game : MonoBehaviour {
     public event EventHandler OnGameStart;
     public event EventHandler OnGoal;
 
+    public float afterGoalTime = 0.115f;
+
     void Awake()
     {
         ballSpawn = GameObject.FindGameObjectWithTag("Ball").transform.position;
@@ -51,7 +53,7 @@ public class Game : MonoBehaviour {
         {
             player1Score++;
         }
-        Invoke("Reset", 0.1f);
+        Invoke("Reset", afterGoalTime);
         hasScored = true;
         OnGoal.Invoke();
         

@@ -52,7 +52,6 @@ public class RandomGoalAudio : MonoBehaviour
                 return clip.Key;
             }
         }
-        Debug.Log(choice);
         return null;
     }
 }
