@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +6,6 @@ public class Game : MonoBehaviour {
 
     public GameObject ballPrefab;
     public GameObject player1, player2;
-    new public Camera camera;
 
     private Vector2 ballSpawn, player1Spawn, player2Spawn;
 
@@ -55,7 +53,9 @@ public class Game : MonoBehaviour {
         }
         Invoke("Reset", afterGoalTime);
         hasScored = true;
-        OnGoal.Invoke();
+
+        if (OnGoal != null)
+            OnGoal.Invoke();
         
     }
 
@@ -66,7 +66,8 @@ public class Game : MonoBehaviour {
         ResetGameObject(player2, player2Spawn);
         hasScored = false;
 
-        OnGameStart.Invoke();
+        if (OnGameStart != null)
+            OnGameStart.Invoke();
     }
 
     private void ResetBall()
@@ -77,7 +78,7 @@ public class Game : MonoBehaviour {
         }
 
         var ball = Instantiate(ballPrefab, ballSpawn, Quaternion.identity) as GameObject;
-        ball.GetComponent<Rigidbody2D>().velocity = Vector2.down * UnityEngine.Random.Range(10f, 30f);
+        ball.GetComponent<Rigidbody2D>().velocity = Vector2.down * Random.Range(10f, 30f);
     }
 
     private void ResetGameObject(GameObject go, Vector2 pos)

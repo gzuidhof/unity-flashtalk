@@ -9,10 +9,13 @@ public class BallShake : MonoBehaviour {
 
     public bool flashScreen = false;
 
+    private new GameObject camera;
+
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        cameraColor = Game.instance.camera.GetComponent<HueModulator>();
+        camera = GameObject.Find("Main Camera");
+        cameraColor = camera.GetComponent<HueModulator>();
     }
 
 
@@ -36,6 +39,6 @@ public class BallShake : MonoBehaviour {
         
 
 
-        Game.instance.camera.GetComponent<Shaker>().Shake(shakeIntensity);
+        camera.GetComponent<Shaker>().Shake(shakeIntensity);
     }
 }
